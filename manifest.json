@@ -1,0 +1,18 @@
+{
+	"manifest_version": 2,
+
+	"name": "Apropos.io",
+	"description": "A Chrome extension for easily tracking hours in Github using Apropos.io",
+	"version": "0.0.1",
+
+	"permissions": [
+		"tabs", "https://github.com/*"
+	],
+	"content_scripts": [
+		{
+			"matches": ["https://github.com/*"],
+			"js": ["HTML.min.js", "main.js"]
+		}
+	]
+
+}
