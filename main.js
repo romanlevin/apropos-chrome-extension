@@ -2,24 +2,32 @@
 /*globals HTML */
 (function() {
     'use strict';
-    var inputNodeDesc = 'input#apropos-hours';
-    var form = HTML.find('div.write-content');
-    form.add(inputNodeDesc);
 
+    // The div that holds the current input form.
+    var formDiv = HTML.find('div.write-content');
+    
+    // The new comment textarea.
     var textarea = HTML.find('textarea[name="comment[body]"]');
 
-    function addAproposListener(el) {
-        el.addEventListener('click', function() {
-            var hours = HTML.find(inputNodeDesc).value;
-            textarea.each(function(el) {
-                if (hours) {
-                    var addition = '\nSpent ' + hours + ' hours on this.';
-                    el.value += addition;
-                }
-            });
+    // The new comment form.
+    var form = HTML.find('form').only(-2);
+
+    // Adding our input field 
+    var aproposHoursField = formDiv.add('input#apropos-hours');
+
+    // This function manipulates the textarea.
+    function addHours() {
+        var hours = aproposHoursField.value;
+        textarea.each(function(el) {
+            if (hours) {
+                var addition = '\nSpent ' + hours + ' hours on this.';
+                el.value += addition;
+            }
         });
     }
 
-    var submit = HTML.find('div.form-actions button[type="submit"]');
-    submit.each(addAproposListener);
+    // Binding the submit listener to the form.
+    form.each(function (el) {
+        el.addEventListener('submit', addHours);
+    });
 })();
