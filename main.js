@@ -12,8 +12,10 @@
         el.addEventListener('click', function() {
             var hours = HTML.find(inputNodeDesc).value;
             textarea.each(function(el) {
-                var addition = '\nSpent ' + hours + ' hours on this.';
-                el.value += addition;
+                if (hours) {
+                    var addition = '\nSpent ' + hours + ' hours on this.';
+                    el.value += addition;
+                }
             });
         });
     }
